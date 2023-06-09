@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { INestApplication, Logger } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
@@ -13,6 +13,14 @@ async function bootstrap() {
 
   // Create a Nest application instance
   const app: INestApplication = await NestFactory.create(AppModule);
+
+  // Add validation pipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  );
 
   // Get configuration from the ConfigService
   const configService: ConfigService = app.get(ConfigService);
