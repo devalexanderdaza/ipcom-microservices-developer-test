@@ -1,6 +1,5 @@
-import { SaleDto } from '@ipcom/shared';
 import { Injectable } from '@nestjs/common';
-import { ResumeDateDto, ResumeDaysDto } from './app.dto';
+import { ResumeDateDto, ResumeDaysDto, SaleDto } from '@ipcom/shared';
 
 @Injectable()
 export class AppService {

@@ -1,7 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ResumeDateDto, ResumeDaysDto, SaleDto } from '@ipcom/shared';
 import { AppService } from './app.service';
-import { SaleDto } from '@ipcom/shared';
-import { ResumeDateDto, ResumeDaysDto } from './app.dto';
 
 @Controller()
 export class AppController {
