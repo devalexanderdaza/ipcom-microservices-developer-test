@@ -41,6 +41,14 @@ import { AppService } from './app.service';
           port: 3001,
         },
       },
+      {
+        name: 'CSV_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: 'localhost',
+          port: 3002,
+        },
+      },
     ]),
   ],
   controllers: [AppController],

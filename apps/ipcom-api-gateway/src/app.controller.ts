@@ -1,10 +1,27 @@
-import { ResumeDateDto, ResumeDaysDto, SaleDto } from '@ipcom/shared';
+import {
+  FileUploadDto,
+  ResumeDateDto,
+  ResumeDaysDto,
+  SaleDto,
+} from '@ipcom/shared';
 
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import {
+  Controller,
+  FileTypeValidator,
+  Get,
+  Param,
+  ParseFilePipe,
+  Post,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 import { Decimal } from 'decimal.js';
 
-import { SalesStadisticsDto } from './app.dto';
+import { ProcessedCsvDto, SalesStadisticsDto } from './app.dto';
 import { AppService } from './app.service';
 
 @Controller()
@@ -46,6 +63,34 @@ export class AppController {
 
     // Return stadistics
     return await this.getStadistics(sales);
+  }
+
+  /**
+   * @description Upload csv file
+   * @param file csv file
+   * @returns Processed csv file
+   */
+  @UseInterceptors(
+    FileInterceptor('csv', {
+      dest: './uploads',
+    }),
+  )
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'CSV file',
+    type: FileUploadDto,
+    required: true,
+  })
+  @Post('csv')
+  async uploadCsv(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [new FileTypeValidator({ fileType: 'text/csv' })],
+      }),
+    )
+    file: Express.Multer.File,
+  ): Promise<ProcessedCsvDto[]> {
+    return await this.appService.processCsv(file.path);
   }
 
   /**
