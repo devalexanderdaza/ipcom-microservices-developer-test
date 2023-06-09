@@ -72,6 +72,7 @@ export class AppController {
         // Count all buyers by credit card
         if (sale.tdc) {
           if (totalSalesByCreditCard[sale.tdc]) {
+            // TODO - Transform to from Decimal to number
             totalSalesByCreditCard[sale.tdc] = totalSalesByCreditCard[
               sale.tdc
             ].plus(sale.monto);
