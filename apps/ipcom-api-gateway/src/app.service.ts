@@ -1,8 +1,11 @@
 import { SaleDto } from '@ipcom/shared';
 import { Injectable } from '@nestjs/common';
+import { ResumeDateDto, ResumeDaysDto } from './app.dto';
 
 @Injectable()
 export class AppService {
+  constructor() {}
+
   private sales: SaleDto[] = [
     {
       clientId: 1304956280,
@@ -28,7 +31,11 @@ export class AppService {
     },
   ];
 
-  async getSales(): Promise<SaleDto[]> {
+  async getSales(date: ResumeDateDto, days: ResumeDaysDto): Promise<SaleDto[]> {
+    console.debug(
+      `getSales(${JSON.stringify(date)}, ${JSON.stringify(days)})`,
+      AppService.name,
+    );
     return this.sales;
   }
 }
