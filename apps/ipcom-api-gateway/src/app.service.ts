@@ -37,18 +37,12 @@ export class AppService {
     },
   ];
 
-  getSales(date: ResumeDateDto, days: ResumeDaysDto): Observable<SaleDto[]> {
+  async getSales(date: ResumeDateDto, days: ResumeDaysDto): Promise<SaleDto[]> {
     const pattern: object = { cmd: 'get-all-sales' };
     const payload: object = { date, days };
-    const sales: Observable<any> = this.salesMicroserviceClientProxy.send(
-      pattern,
-      payload,
-    );
-    console.debug(sales);
-    // console.debug(
-    //   `getSales(${JSON.stringify(date)}, ${JSON.stringify(days)})`,
-    //   AppService.name,
-    // );
-    return sales;
+    const sales = this.salesMicroserviceClientProxy
+      .send(pattern, payload)
+      .pipe((sales: Observable<SaleDto[]>) => sales);
+    return await sales.toPromise();
   }
 }

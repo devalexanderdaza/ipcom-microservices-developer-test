@@ -12,13 +12,9 @@ export class SalesMicroserviceController {
   ) {}
 
   @MessagePattern({ cmd: 'get-all-sales' })
-  async getAllSales(payload: {
-    date: ResumeDateDto;
-    days: ResumeDaysDto;
-  }): Promise<any> {
+  async getAllSales(payload: { date: ResumeDateDto; days: ResumeDaysDto }) {
     return await this.salesMicroserviceService.getSalesFromExternalSource(
       payload.date,
-      payload.days,
     );
   }
 }
