@@ -19,6 +19,17 @@ export class AppController {
     @Param() params: ResumeDateDto,
     @Query() query: ResumeDaysDto,
   ): Promise<SaleDto[]> {
-    return await this.appService.getSales(params);
+    const days: number = query.dias ? query.dias : 1;
+    const sales: SaleDto[] = [];
+    for (let i = 0; i < days; i++) {
+      const date: Date = new Date(params.date);
+      date.setDate(date.getDate() + i);
+      sales.push(
+        ...(await this.appService.getSales({
+          date: date.toISOString(),
+        })),
+      );
+    }
+    return sales;
   }
 }
