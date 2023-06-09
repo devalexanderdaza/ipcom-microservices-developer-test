@@ -1,8 +1,41 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/ipcom-api-gateway/src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/ipcom-api-gateway/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/ipcom-api-gateway",
+  "projects": {
+    "ipcom-api-gateway": {
+      "type": "application",
+      "root": "apps/ipcom-api-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/ipcom-api-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ipcom-api-gateway/tsconfig.app.json"
+      }
+    },
+    "sales-microservice": {
+      "type": "application",
+      "root": "apps/sales-microservice",
+      "entryFile": "main",
+      "sourceRoot": "apps/sales-microservice/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sales-microservice/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    }
   }
 }
