@@ -1,6 +1,6 @@
 {
   "name": "ipcom-api-gateway",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Microservices project for Ipcom, developed as a test for the Senior Software Engineer position.",
   "author": {
     "name": "Alexander Daza",
