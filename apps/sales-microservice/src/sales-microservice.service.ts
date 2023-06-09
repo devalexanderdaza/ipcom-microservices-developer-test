@@ -11,6 +11,12 @@ import { catchError, firstValueFrom } from 'rxjs';
 export class SalesMicroserviceService {
   constructor(private readonly httpService: HttpService) {}
 
+  /**
+   * @description Get all sales from external source
+   * @param date Date to get sales
+   * @returns All sales from external source
+   * @throws An error happened!
+   */
   async getSalesFromExternalSource(date: ResumeDateDto): Promise<SaleDto[]> {
     const dateService: string = date.date.split('T')[0];
     const { data } = await firstValueFrom(

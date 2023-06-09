@@ -15,6 +15,8 @@ async function bootstrap() {
       },
     },
   );
+
+  // Start listening for incoming requests
   await app.listen();
 }
 bootstrap();

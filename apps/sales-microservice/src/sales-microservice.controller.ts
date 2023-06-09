@@ -1,6 +1,6 @@
-import { ResumeDateDto, ResumeDaysDto } from '@ipcom/shared';
+import { ResumeDateDto, SaleDto } from '@ipcom/shared';
 
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 
 import { SalesMicroserviceService } from './sales-microservice.service';
@@ -11,8 +11,13 @@ export class SalesMicroserviceController {
     private readonly salesMicroserviceService: SalesMicroserviceService,
   ) {}
 
+  /**
+   * @description Get all sales from external source
+   * @param payload Payload with date
+   * @returns All sales from external source
+   */
   @MessagePattern({ cmd: 'get-all-sales' })
-  async getAllSales(payload: { date: ResumeDateDto; days: ResumeDaysDto }) {
+  async getAllSales(payload: { date: ResumeDateDto }): Promise<SaleDto[]> {
     return await this.salesMicroserviceService.getSalesFromExternalSource(
       payload.date,
     );
