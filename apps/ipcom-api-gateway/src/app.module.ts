@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import * as Joi from 'joi';
 
@@ -31,6 +32,16 @@ import { AppService } from './app.service';
         abortEarly: true,
       },
     }),
+    ClientsModule.register([
+      {
+        name: 'SALES_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: 'localhost',
+          port: 3001,
+        },
+      },
+    ]),
   ],
   controllers: [AppController],
   providers: [AppService],
