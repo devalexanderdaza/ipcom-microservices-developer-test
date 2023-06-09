@@ -1,6 +1,23 @@
-import { ResumeDateDto, ResumeDaysDto, SaleDto } from '@ipcom/shared';
+import {
+  FileUploadDto,
+  ResumeDateDto,
+  ResumeDaysDto,
+  SaleDto,
+} from '@ipcom/shared';
 
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import {
+  Controller,
+  FileTypeValidator,
+  Get,
+  Param,
+  ParseFilePipe,
+  Post,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 import { Decimal } from 'decimal.js';
 
@@ -46,6 +63,25 @@ export class AppController {
 
     // Return stadistics
     return await this.getStadistics(sales);
+  }
+
+  @UseInterceptors(FileInterceptor('csv'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'CSV file',
+    type: FileUploadDto,
+    required: true,
+  })
+  @Post('csv')
+  async uploadCsv(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [new FileTypeValidator({ fileType: 'text/csv' })],
+      }),
+    )
+    file: Express.Multer.File,
+  ): Promise<void> {
+    console.log(file);
   }
 
   /**
