@@ -17,6 +17,13 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "@ipcom/shared": [
+        "libs/shared/src"
+      ],
+      "@ipcom/shared/*": [
+        "libs/shared/src/*"
+      ]
+    }
   }
 }
