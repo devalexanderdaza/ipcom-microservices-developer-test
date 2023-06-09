@@ -21,7 +21,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 
 import { Decimal } from 'decimal.js';
 
-import { SalesStadisticsDto } from './app.dto';
+import { ProcessedCsvDto, SalesStadisticsDto } from './app.dto';
 import { AppService } from './app.service';
 
 @Controller()
@@ -65,7 +65,16 @@ export class AppController {
     return await this.getStadistics(sales);
   }
 
-  @UseInterceptors(FileInterceptor('csv'))
+  /**
+   * @description Upload csv file
+   * @param file csv file
+   * @returns Processed csv file
+   */
+  @UseInterceptors(
+    FileInterceptor('csv', {
+      dest: './uploads',
+    }),
+  )
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'CSV file',
@@ -80,8 +89,8 @@ export class AppController {
       }),
     )
     file: Express.Multer.File,
-  ): Promise<void> {
-    console.log(file);
+  ): Promise<ProcessedCsvDto[]> {
+    return await this.appService.processCsv(file.path);
   }
 
   /**
