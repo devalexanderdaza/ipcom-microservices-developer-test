@@ -36,6 +36,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/shared/tsconfig.lib.json"
       }
+    },
+    "csv-microservice": {
+      "type": "application",
+      "root": "apps/csv-microservice",
+      "entryFile": "main",
+      "sourceRoot": "apps/csv-microservice/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/csv-microservice/tsconfig.app.json"
+      }
     }
   }
 }
