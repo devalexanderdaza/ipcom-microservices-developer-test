@@ -1,73 +1,131 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# IPCOM - API Gateway with Microservices for Sr. Fullstack Software Developer position
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This is a project created with the purpose of providing evidence for the position of "Sr. Fullstack Software Developer position" on IPCom with Cloud Architecture and Microservices.
 
-## Description
+## Monorepository
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a mono repository, it has two folders, one for the api grateway and one for the microservices powered by NestJS workspaces.
+
+## Features
+
+- API Rest with NestJS (API Gateway)
+- Swagger documentation
+- Microservices with NestJS (Cloud architecture) using TCP
+- Message Patterns for connect microservices and API Gateway
+- Custom @ipcom/shared library for share code between microservices and API Gateway
+- Interfaces and DTOs for share code between microservices and API Gateway
+- Upload and validate csv files with users and roles for custom organizations (in root folder has a file example for upload - users.csv and users.xlsx)
+- Cors
+- Validation
+- Guards
+- Compression
+- API Versioning
+
+## Authors
+
+- [@devalexanderdaza](https://www.github.com/devalexanderdaza)
+
+
+## API Reference
+
+This project has a Swagger documentation, you can see it in the following link
+
+```http
+  http://localhost:5000/documentation
+```
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file (see example in .env.example)
+
+`APP_DEBUG`
+
+`API_GATEWAY_HOST`
+
+`API_GATEWAY_PORT`
+
+`API_GATEWAY_URL`
+
+`API_GATEWAY_VERSION`
+
+`API_GATEWAY_NAME`
+
+`API_GATEWAY_DESCRIPTION`
+
+`API_GATEWAY_CONTACT_NAME`
+
+`API_GATEWAY_CONTACT_URL`
+
+`API_GATEWAY_CONTACT_EMAIL`
+
+`API_GATEWAY_LICENSE_NAME`
+
+`API_GATEWAY_LICENSE_URL`
 
 ## Installation
 
-```bash
-$ yarn install
-```
-
-## Running the app
+Install with yarn
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+  yarn install
 ```
 
-## Test
+Run first the sales microservice
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+  yarn run start:dev:microservice:sales
 ```
 
-## Support
+After run the API Gateway
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+  yarn run start:dev:api
+```
 
-## Stay in touch
+Build API Gateway
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+  yarn run build:api
+```
 
-## License
+Build microservices
 
-Nest is [MIT licensed](LICENSE).
+```bash
+  yarn run build:microservice:sales
+```
+
+Build @ipcom/shared library
+
+```bash
+  yarn run build:library:shared
+```
+
+```bash
+  yarn run build:microservice:sales
+```
+
+After run in development mode the backend run on 
+
+```bash
+  http://localhost:5000
+```
+
+and the documentation on
+
+```bash
+  http://localhost:5000/documentation
+```
+
+## Running Tests
+
+To run tests, run the following command (Tests for API Gateway and microservices finished)
+
+```bash
+  yarn run test
+```
+    
+## Acknowledgements
+
+ - [NestJS](https://nestjs.com/)
